@@ -1,0 +1,1539 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="British phonics practice for an FS2 child: letter names, letter sounds, capitals and lower case, and spelling a word she only hears.">
+<meta name="theme-color" content="#2D5FA8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Letters">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" href="icons/favicon.png" sizes="64x64">
+<style>
+  :root{
+    color-scheme: light dark;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; }
+  img{ max-width:100%; }
+  [hidden]{ display:none !important; }
+</style>
+<title>Letters and Sounds Club</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700&display=swap">
+
+<style>
+  :root{
+    --paper:#F3F6FB; --card:#FFFFFF; --card-2:#FBFCFE;
+    --ink:#1B2740; --ink-soft:#5B6784; --ink-faint:#93A0B8;
+    --line:#CBD6E6; --rule:#DCE4F0;
+    --blue:#2D5FA8; --blue-soft:#E4ECF9; --blue-deep:#1E4479;
+    --red:#C6465C; --red-soft:#FBE9EC;
+    --gold:#D99A1E; --gold-soft:#FBF0D8;
+    --green:#3B8A5C; --green-soft:#E3F1E9;
+    --shadow-1:0 1px 0 rgba(27,39,64,.05), 0 2px 6px rgba(27,39,64,.06);
+    --shadow-2:0 2px 0 rgba(27,39,64,.06), 0 10px 26px rgba(27,39,64,.10);
+    --r-s:10px; --r-m:16px; --r-l:24px;
+    --sans:"Nunito",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    --display:"Fredoka","Nunito",ui-sans-serif,system-ui,sans-serif;
+    --letter:"Andika","Comic Sans MS","Segoe Print",ui-rounded,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#111725; --card:#1A2232; --card-2:#202A3D;
+      --ink:#E9EEF7; --ink-soft:#9DAAC2; --ink-faint:#6E7C96;
+      --line:#2E3A52; --rule:#27314A;
+      --blue:#79A9EA; --blue-soft:#1D2B44; --blue-deep:#A8C7F2;
+      --red:#E9788A; --red-soft:#33212A;
+      --gold:#EFBB55; --gold-soft:#332915;
+      --green:#6BBE8E; --green-soft:#1B2E26;
+      --shadow-1:0 1px 0 rgba(0,0,0,.25), 0 2px 6px rgba(0,0,0,.3);
+      --shadow-2:0 2px 0 rgba(0,0,0,.25), 0 10px 26px rgba(0,0,0,.38);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#111725; --card:#1A2232; --card-2:#202A3D;
+    --ink:#E9EEF7; --ink-soft:#9DAAC2; --ink-faint:#6E7C96;
+    --line:#2E3A52; --rule:#27314A;
+    --blue:#79A9EA; --blue-soft:#1D2B44; --blue-deep:#A8C7F2;
+    --red:#E9788A; --red-soft:#33212A;
+    --gold:#EFBB55; --gold-soft:#332915;
+    --green:#6BBE8E; --green-soft:#1B2E26;
+    --shadow-1:0 1px 0 rgba(0,0,0,.25), 0 2px 6px rgba(0,0,0,.3);
+    --shadow-2:0 2px 0 rgba(0,0,0,.25), 0 10px 26px rgba(0,0,0,.38);
+  }
+
+  [hidden]{display:none !important}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:16px; line-height:1.5;
+    -webkit-tap-highlight-color:transparent;
+    -webkit-text-size-adjust:100%;
+  }
+  button{font-family:inherit; color:inherit; cursor:pointer; touch-action:manipulation}
+  .app{display:flex; flex-direction:column; min-height:100%}
+
+  /* ---------- top bar ---------- */
+  .bar{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:20;
+    display:flex; align-items:center; gap:10px;
+    padding:10px 16px; background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex; align-items:baseline; gap:8px; margin-right:auto; min-width:0}
+  .brand b{font-family:var(--display); font-weight:600; font-size:17px; letter-spacing:.2px; white-space:nowrap}
+  .brand span{font-size:12px; color:var(--ink-faint); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .icon-btn{
+    border:1px solid var(--line); background:var(--card); border-radius:999px;
+    padding:8px 14px; font-size:14px; font-weight:700; color:var(--ink-soft);
+    display:inline-flex; align-items:center; gap:6px; min-height:40px;
+  }
+  .icon-btn:active{transform:translateY(1px)}
+  .icon-btn.solid{background:var(--blue); border-color:var(--blue); color:#fff}
+
+  /* ---------- shell ---------- */
+  .wrap{width:100%; max-width:1040px; margin:0 auto; padding-inline:16px; padding-block:20px 40px; flex:1}
+  h1{font-family:var(--display); font-weight:600; font-size:clamp(24px,5vw,34px); margin:0 0 6px; text-wrap:balance; letter-spacing:.2px}
+  .sub{color:var(--ink-soft); margin:0 0 22px; max-width:62ch}
+  h2{font-family:var(--display); font-weight:600; font-size:20px; margin:28px 0 12px}
+  .eyebrow{
+    font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-faint); margin:0 0 6px;
+  }
+
+  /* ---------- menu ---------- */
+  .stages{display:grid; gap:12px; grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+  .stage{
+    display:flex; gap:14px; align-items:flex-start; text-align:left; width:100%;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--r-m);
+    padding:16px; box-shadow:var(--shadow-1); transition:box-shadow .15s ease, transform .12s ease;
+  }
+  .stage:active{transform:translateY(1px)}
+  .stage:hover{box-shadow:var(--shadow-2)}
+  .stage .num{
+    flex:0 0 auto; width:38px; height:38px; border-radius:10px;
+    background:var(--blue-soft); color:var(--blue-deep);
+    display:grid; place-items:center; font-family:var(--display); font-weight:600; font-size:17px;
+  }
+  .stage .txt{min-width:0}
+  .stage .txt b{display:block; font-family:var(--display); font-weight:500; font-size:17px; margin-bottom:2px}
+  .stage .txt small{display:block; color:var(--ink-soft); font-size:13.5px; line-height:1.45}
+  .stage .goal{
+    display:inline-block; margin-top:8px; font-size:11px; font-weight:700; letter-spacing:.06em;
+    color:var(--ink-faint); border:1px solid var(--line); border-radius:999px; padding:2px 8px;
+  }
+  .stage.locked{opacity:.55}
+  .stage.locked .num{background:var(--gold-soft); color:var(--gold)}
+  .stage .goal.later{color:var(--gold); border-color:var(--gold)}
+
+  /* ---------- activity chrome ---------- */
+  .task{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--r-l);
+    box-shadow:var(--shadow-2); padding:clamp(16px,3vw,28px); margin-bottom:16px;
+  }
+  .prompt{
+    font-family:var(--display); font-weight:500; font-size:clamp(17px,3.6vw,22px);
+    text-align:center; margin:0 0 4px; text-wrap:balance;
+  }
+  .hint{text-align:center; color:var(--ink-soft); font-size:14px; margin:0 0 18px}
+
+  /* ---------- the handwriting guide: this app's signature ---------- */
+  .guide{
+    position:relative; display:grid; place-items:center;
+    height:clamp(150px,30vw,210px); margin:4px 0 14px;
+    border-radius:var(--r-m); overflow:hidden; background:var(--card-2);
+  }
+  .guide::before{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(var(--rule),var(--rule)) 0 22% /100% 1px no-repeat,
+      linear-gradient(var(--rule),var(--rule)) 0 46% /100% 1px no-repeat,
+      linear-gradient(var(--line),var(--line)) 0 72% /100% 2px no-repeat,
+      linear-gradient(var(--rule),var(--rule)) 0 94% /100% 1px no-repeat;
+  }
+  .guide::after{
+    content:""; position:absolute; left:26px; top:0; bottom:0; width:1px; background:var(--red); opacity:.35;
+  }
+  .guide .glyph{
+    position:relative; font-family:var(--letter); font-weight:400;
+    font-size:clamp(84px,19vw,150px); line-height:1;
+    transform:translateY(6%); letter-spacing:.06em; color:var(--ink);
+  }
+
+  /* ---------- letter grid ---------- */
+  .grid{display:grid; gap:10px; grid-template-columns:repeat(auto-fill,minmax(84px,1fr))}
+  .grid.small{grid-template-columns:repeat(auto-fill,minmax(66px,1fr))}
+  .tile{
+    position:relative; aspect-ratio:1/1; min-height:64px;
+    background:var(--card); border:1.5px solid var(--line); border-radius:var(--r-m);
+    display:grid; place-items:center; box-shadow:var(--shadow-1);
+    font-family:var(--letter); font-size:clamp(26px,6vw,34px); line-height:1; color:var(--ink);
+    padding:0; transition:transform .1s ease, border-color .15s ease, background .15s ease;
+  }
+  .tile:active{transform:scale(.96)}
+  .tile.on{border-color:var(--blue); background:var(--blue-soft)}
+  .tile.right{border-color:var(--green); background:var(--green-soft); color:var(--green)}
+  .tile.wrong{border-color:var(--red); background:var(--red-soft); color:var(--red)}
+  .tile .dots{position:absolute; bottom:6px; left:0; right:0; display:flex; gap:3px; justify-content:center}
+  .tile .dots i{width:5px; height:5px; border-radius:999px; background:var(--line)}
+  .tile .dots i.lit{background:var(--gold)}
+  @keyframes wobble{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .wobble{animation:wobble .3s ease}
+  @media (prefers-reduced-motion:reduce){ .wobble{animation:none} .tile{transition:none} }
+
+  /* ---------- word strip ---------- */
+  .word-strip{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:6px}
+  .wl{
+    font-family:var(--letter); font-size:clamp(38px,9vw,60px); line-height:1.1;
+    background:var(--card-2); border:1.5px solid var(--line); border-radius:12px;
+    padding:2px 14px 6px; color:var(--ink);
+  }
+  .wl.on{border-color:var(--blue); background:var(--blue-soft)}
+  .wl.right{border-color:var(--green); background:var(--green-soft)}
+  .slots{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:6px 0 18px}
+  .slot{
+    width:clamp(52px,12vw,74px); height:clamp(62px,14vw,86px);
+    border:2px dashed var(--line); border-radius:12px; background:var(--card-2);
+    display:grid; place-items:center; font-family:var(--letter);
+    font-size:clamp(30px,7vw,44px); color:var(--ink);
+  }
+  .slot.filled{border-style:solid; border-color:var(--green); background:var(--green-soft)}
+  .slot.next{border-color:var(--blue); border-style:solid}
+
+  /* ---------- row of actions ---------- */
+  .row{display:flex; flex-wrap:wrap; gap:10px; justify-content:center}
+  .btn{
+    border:1.5px solid var(--line); background:var(--card); border-radius:999px;
+    padding:12px 20px; font-family:var(--display); font-weight:500; font-size:16px;
+    min-height:48px; display:inline-flex; align-items:center; gap:8px; color:var(--ink);
+  }
+  .btn.primary{background:var(--blue); border-color:var(--blue); color:#fff}
+  .btn.ghost{background:transparent}
+  .btn:active{transform:translateY(1px)}
+  .btn:disabled{opacity:.45}
+
+  /* ---------- feedback ---------- */
+  .say{
+    text-align:center; min-height:28px; font-family:var(--display); font-weight:500;
+    font-size:17px; margin:10px 0 0; color:var(--ink-soft);
+  }
+  .say.good{color:var(--green)}
+  .say.soft{color:var(--red)}
+
+  /* ---------- info panels ---------- */
+  .note{
+    background:var(--gold-soft); border:1px solid var(--line); border-left:4px solid var(--gold);
+    border-radius:var(--r-s); padding:12px 14px; font-size:14px; color:var(--ink); margin:14px 0;
+  }
+  .note b{font-family:var(--display); font-weight:600}
+  .split{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .field{display:flex; flex-direction:column; gap:6px; margin-bottom:14px}
+  .field label{font-size:13px; font-weight:700; color:var(--ink-soft)}
+  select,input[type=range],input[type=text]{
+    font-family:var(--sans); font-size:15px; color:var(--ink);
+    background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px; width:100%;
+  }
+  input[type=range]{padding:6px 0}
+  table{width:100%; border-collapse:collapse; font-size:14px}
+  th,td{text-align:left; padding:7px 8px; border-bottom:1px solid var(--rule)}
+  th{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); font-weight:700}
+  td.g{font-family:var(--letter); font-size:20px}
+  .scroll{overflow-x:auto}
+  .pair-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:8px}
+  .pair-card{
+    flex:1 1 160px; max-width:260px; background:var(--card-2); border:1.5px solid var(--line);
+    border-radius:var(--r-m); padding:14px; text-align:center;
+  }
+  .pair-card .g{font-family:var(--letter); font-size:clamp(44px,10vw,64px); line-height:1.1}
+  .pair-card small{display:block; color:var(--ink-soft); font-size:13px; margin-top:4px}
+  /* ---------- the grown-ups lock ---------- */
+  .lockwrap{max-width:320px; margin:0 auto; text-align:center}
+  .pips{display:flex; gap:14px; justify-content:center; margin:18px 0 22px}
+  .pips i{
+    width:16px; height:16px; border-radius:999px;
+    border:2px solid var(--line); background:transparent;
+  }
+  .pips i.on{background:var(--blue); border-color:var(--blue)}
+  .keypad{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+  .key{
+    min-height:60px; border:1.5px solid var(--line); background:var(--card);
+    border-radius:var(--r-m); font-family:var(--display); font-weight:500;
+    font-size:24px; color:var(--ink); font-variant-numeric:tabular-nums;
+  }
+  .key:active{transform:translateY(1px); background:var(--blue-soft)}
+  .key.wide{font-size:15px; font-weight:600; color:var(--ink-soft)}
+  .linkish{
+    background:none; border:0; color:var(--ink-faint); font-size:13px;
+    text-decoration:underline; padding:10px; margin-top:8px;
+  }
+  :focus-visible{outline:3px solid var(--blue); outline-offset:2px; border-radius:6px}
+  .foot{color:var(--ink-faint); font-size:12.5px; text-align:center; padding:18px 16px 28px}
+</style>
+
+
+<script>
+/* Register the offline cache, and make sure a new version actually reaches the
+   tablet. updateViaCache:"none" stops the browser serving sw.js from its own
+   HTTP cache, and the controllerchange handler reloads once when a newer
+   worker takes over, so nobody has to know to close and reopen the app. */
+if ("serviceWorker" in navigator) {
+  var hadController = !!navigator.serviceWorker.controller;
+  var reloading = false;
+  navigator.serviceWorker.addEventListener("controllerchange", function () {
+    if (!hadController || reloading) return;
+    reloading = true;
+    location.reload();
+  });
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js", { updateViaCache: "none" })
+      .then(function (reg) { reg.update(); })
+      .catch(function () {});
+  });
+}
+</script>
+</head>
+<body>
+<div class="app">
+  <div class="bar">
+    <div class="brand"><b>Letters &amp; Sounds Club</b><span id="crumb">Choose an activity</span></div>
+    <button class="icon-btn" id="backBtn" hidden>Back</button>
+    <button class="icon-btn" id="parentBtn">Grown-ups</button>
+  </div>
+  <div class="wrap" id="view"></div>
+  <div class="foot">British letter names and sounds. Made for FS2. <span id="build-stamp"></span></div>
+</div>
+
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================ DATA ============================ */
+  const LETTERS = [
+    {l:"s",u:"S",name:"ess",soundSay:"sss, sss, sun",sound:"sss",word:"sun",emoji:"☀️",set:1,form:"Start at the top, curl back and round like a snake."},
+    {l:"a",u:"A",name:"ay",soundSay:"ah, ah, apple",sound:"ah",word:"apple",emoji:"🍎",set:1,form:"Round the apple, up and down the stalk."},
+    {l:"t",u:"T",name:"tee",soundSay:"tuh, tuh, tap",sound:"t",word:"tap",emoji:"🚰",set:1,form:"Down the tower, across the top."},
+    {l:"p",u:"P",name:"pee",soundSay:"puh, puh, pen",sound:"p",word:"pen",emoji:"🖊️",set:1,form:"Down his plait, up and over his face."},
+    {l:"i",u:"I",name:"eye",soundSay:"ih, ih, insect",sound:"ih",word:"insect",emoji:"🐜",set:2,form:"Down the body, dot on top."},
+    {l:"n",u:"N",name:"en",soundSay:"nnn, nnn, net",sound:"nnn",word:"net",emoji:"🥅",set:2,form:"Down Nobby, over his net. One bump."},
+    {l:"m",u:"M",name:"em",soundSay:"mmm, mmm, mat",sound:"mmm",word:"mat",emoji:"🧶",set:2,form:"Down Maisie, over the mountains. Two bumps."},
+    {l:"d",u:"D",name:"dee",soundSay:"duh, duh, dog",sound:"d",word:"dog",emoji:"🐶",set:2,form:"Round his bottom first, then up his tall body and down. The circle comes FIRST."},
+    {l:"g",u:"G",name:"gee",soundSay:"guh, guh, goat",sound:"g",word:"goat",emoji:"🐐",set:3,form:"Round her face, down her hair and give her a curl."},
+    {l:"o",u:"O",name:"oh",soundSay:"o, o, orange",sound:"o",word:"orange",emoji:"🍊",set:3,form:"All the way round, and stop where you started."},
+    {l:"c",u:"C",name:"see",soundSay:"cuh, cuh, cat",sound:"c",word:"cat",emoji:"🐱",set:3,form:"Curl around like a c, and leave the mouth open."},
+    {l:"k",u:"K",name:"kay",soundSay:"cuh, cuh, kite",sound:"c",word:"kite",emoji:"🪁",set:3,form:"Down the kangaroo's body, then his tail and his leg."},
+    {l:"ck",u:"CK",name:"see kay",soundSay:"cuh, cuh, duck",sound:"c",word:"duck",emoji:"🦆",set:4,form:"Two letters, one sound. It lives at the end of a word, never at the start."},
+    {l:"e",u:"E",name:"ee",soundSay:"eh, eh, egg",sound:"eh",word:"egg",emoji:"🥚",set:4,form:"Across, then round the egg."},
+    {l:"u",u:"U",name:"you",soundSay:"uh, uh, umbrella",sound:"uh",word:"umbrella",emoji:"☂️",set:4,form:"Down and round like a cup, then straight down. A cup holds water, so it opens UP."},
+    {l:"r",u:"R",name:"ar",soundSay:"rrr, rrr, rat",sound:"rrr",word:"rat",emoji:"🐀",set:4,form:"Down his back, then curl over his arm."},
+    {l:"h",u:"H",name:"aitch",soundSay:"huh, huh, hat",sound:"h",word:"hat",emoji:"🎩",set:5,form:"Down his head to his heels, up and over his hump."},
+    {l:"b",u:"B",name:"bee",soundSay:"buh, buh, bat",sound:"b",word:"bat",emoji:"🏏",set:5,form:"Down the long line FIRST, then up and round his fat tummy. Bat first, then ball."},
+    {l:"f",u:"F",name:"eff",soundSay:"fff, fff, fish",sound:"fff",word:"fish",emoji:"🐟",set:5,form:"Down the stem and draw the leaves, then a line across."},
+    {l:"l",u:"L",name:"ell",soundSay:"lll, lll, leg",sound:"lll",word:"leg",emoji:"🦵",set:5,form:"One straight line down. Nothing else."},
+    {l:"j",u:"J",name:"jay",soundSay:"juh, juh, jam",sound:"j",word:"jam",emoji:"🍓",set:6,form:"Down his body, curl at the bottom, dot on top."},
+    {l:"v",u:"V",name:"vee",soundSay:"vvv, vvv, van",sound:"vvv",word:"van",emoji:"🚐",set:6,form:"Down a wing, up a wing. One valley."},
+    {l:"w",u:"W",name:"double you",soundSay:"wuh, wuh, web",sound:"w",word:"web",emoji:"🕸️",set:6,form:"Down, up, down, up. Two valleys."},
+    {l:"x",u:"X",name:"ex",soundSay:"ks, ks, fox",sound:"ks",word:"fox",emoji:"🦊",set:6,form:"Down the arm and leg, then the other side. It usually hides at the END of a word."},
+    {l:"y",u:"Y",name:"why",soundSay:"yuh, yuh, yes",sound:"y",word:"yoyo",emoji:"🪀",set:7,form:"Down a horn, up a horn, then the long tail below the line. The tail goes DOWN."},
+    {l:"z",u:"Z",name:"zed",soundSay:"zzz, zzz, zip",sound:"zzz",word:"zip",emoji:"🦓",set:7,form:"Across, down the slide, across again."},
+    {l:"qu",u:"Qu",name:"cue you",soundSay:"kwuh, kwuh, queen",sound:"kw",word:"queen",emoji:"👑",set:7,form:"Two letters that always travel together. q never goes anywhere without u."}
+  ];
+  const BY = {}; LETTERS.forEach(x => BY[x.l] = x);
+
+  /* q on its own is never taught, because in English it never appears without u.
+     It still needs an entry, or the p/q and g/q clinics below cannot draw or name
+     it. Kept deliberately out of LETTERS so it never reaches the board, the
+     letter pools or the word games. */
+  BY["q"] = {l:"q",u:"Q",name:"cue",soundSay:"kwuh, kwuh, queen",sound:"kw",word:"queen",emoji:"👑",set:7,
+             form:"Round his face, then straight down his long tail. q never goes anywhere without u."};
+
+  const PAIRS = [
+    {a:"b",b:"d",trick:"Make a bed with your fists. Your left hand is b, your right hand is d. The word bed is the picture.",cue:"b is bat first, then ball. d is ball first, then bat."},
+    {a:"u",b:"y",trick:"u is a cup that holds water, so it sits ON the line. y has a tail that falls BELOW the line.",cue:"If it hangs down, it is y."},
+    {a:"p",b:"q",trick:"p points backwards, q points forwards, and q always brings u along.",cue:"p in pig, q in queen."},
+    {a:"m",b:"n",trick:"m has two bumps like mountains. n has one bump like a net.",cue:"Count the bumps."},
+    {a:"i",b:"j",trick:"Both have a dot, but i sits on the line and j dives below it.",cue:"j has the hook."},
+    {a:"v",b:"w",trick:"v has one valley. w has two.",cue:"Count the valleys."},
+    {a:"g",b:"q",trick:"g curls back like a hook. q goes straight down.",cue:"g in goat, q in queen."},
+    {a:"h",b:"n",trick:"h is tall. n is short. Same bump, different height.",cue:"Look at the top."},
+    {a:"s",b:"z",trick:"s curves like a snake. z is made of straight lines.",cue:"Curvy or straight."}
+  ];
+
+  const WORDS = {
+    vc:["at","in","on","up","it","am","an","if","us","ox"],
+    cvcEasy:["sat","pat","tap","pin","sit","nip","man","mad","dad","tin"],
+    cvcMid:["dig","got","cot","kit","peg","net","run","hug","bat","big"],
+    cvcHard:["fun","leg","jam","van","web","six","yes","zip","fox","box","cup","sun","hat","bed","top","mud","wet","log","hen","bus"],
+    long:["stop","flag","hand","milk","jump","nest","frog","desk","swim","lamp","best","drum","sand","tent","wind","plan"]
+  };
+  const ALLWORDS = [].concat(WORDS.vc,WORDS.cvcEasy,WORDS.cvcMid,WORDS.cvcHard,WORDS.long);
+
+  const TWOSOUNDS = [
+    {letter:"c",a:{w:"cat",s:"cuh"},b:{w:"city",s:"sss"},rule:"c says sss before e, i and y. Everywhere else it says cuh."},
+    {letter:"g",a:{w:"goat",s:"guh"},b:{w:"gem",s:"juh"},rule:"g often says juh before e, i and y."},
+    {letter:"y",a:{w:"yes",s:"yuh"},b:{w:"happy",s:"ee"},rule:"y says yuh at the start of a word, but ee at the end."},
+    {letter:"a",a:{w:"cat",s:"ah"},b:{w:"cake",s:"ay"},rule:"A magic e on the end makes the vowel say its NAME."},
+    {letter:"i",a:{w:"pin",s:"ih"},b:{w:"pine",s:"eye"},rule:"Magic e again. pin becomes pine."},
+    {letter:"o",a:{w:"hop",s:"o"},b:{w:"hope",s:"oh"},rule:"Magic e again. hop becomes hope."},
+    {letter:"u",a:{w:"cub",s:"uh"},b:{w:"cube",s:"you"},rule:"Magic e again. cub becomes cube."},
+    {letter:"s",a:{w:"sun",s:"sss"},b:{w:"dogs",s:"zzz"},rule:"An s on the end of a plural often buzzes like a z."}
+  ];
+
+  const STAGES = [
+    {id:"board", n:"1", t:"Letter Board", d:"Tap any letter to hear its name, its sound and a word that starts with it. Big and small together.", goal:"Goals 1, 2 and 3"},
+    {id:"match", n:"2", t:"Big and Small", d:"A capital letter appears. She finds the small letter that matches it.", goal:"Goal 1"},
+    {id:"tricky", n:"3", t:"Tricky Twins", d:"The letters that look alike. b and d, u and y, m and n, with a trick for each pair.", goal:"Goal 1"},
+    {id:"hunt", n:"4", t:"Sound Hunt", d:"She hears a sound and taps the letter that makes it. No letter is shown first.", goal:"Goal 3", needsSound:true},
+    {id:"spell", n:"5", t:"Look and Name", d:"A new word appears. She names every letter in it, then builds it again from memory.", goal:"Goal 4"},
+    {id:"two", n:"6", t:"Two Sounds", d:"The same letter making two different sounds. cat and city, pin and pine.", goal:"Between goals 4 and 5", needsSound:true},
+    {id:"listen", n:"7", t:"Listen and Spell", d:"She hears a word with nothing on the screen, then taps the letters she hears.", goal:"Goal 5", needsSound:true}
+  ];
+
+  /* ============================ STATE ============================ */
+  /* stageMode controls what she HEARS, and it starts at names only.
+     Letter names first, sounds only once the names are automatic, because two
+     labels for one shape at the same time is what confuses a child who is
+     already unsure which shape is which. The parent moves this on, not the app. */
+  /* pin is a child gate, not security. It is stored in the clear because the
+     only thing it defends against is a four year old tapping about. */
+  const DEF = {maxSet:2, voiceURI:"", rate:0.8, show:"both", progress:{}, child:"", stageMode:"names", nameStyle:"letter", pin:""};
+  let S = Object.assign({}, DEF);
+  try{
+    const raw = localStorage.getItem("lsc-state");
+    if(raw) S = Object.assign({}, DEF, JSON.parse(raw));
+  }catch(e){}
+  function save(){ try{ localStorage.setItem("lsc-state", JSON.stringify(S)); }catch(e){} }
+
+  function pool(){ return LETTERS.filter(x => x.set <= S.maxSet); }
+  function single(){ return pool().filter(x => x.l.length === 1); }
+  function score(l,skill){ const p = S.progress[l]; return (p && p[skill]) || 0; }
+  function win(l,skill){
+    if(!S.progress[l]) S.progress[l] = {};
+    S.progress[l][skill] = Math.min(6, (S.progress[l][skill]||0) + 1);
+    save();
+  }
+
+  /* ============================ AUDIO ============================ */
+  let voices = [];
+  function loadVoices(){ try{ voices = window.speechSynthesis.getVoices() || []; }catch(e){ voices = []; } }
+  if(window.speechSynthesis){
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }
+  function britishVoices(){
+    const gb = voices.filter(v => /en[-_]GB/i.test(v.lang));
+    return gb.length ? gb : voices.filter(v => /^en/i.test(v.lang));
+  }
+  function pickVoice(){
+    if(!voices.length) loadVoices();
+    const gb = britishVoices();
+    if(S.voiceURI){
+      const m = voices.find(v => v.voiceURI === S.voiceURI);
+      if(m) return m;
+    }
+    const pref = ["Daniel","Serena","Arthur","Kate","Google UK English Female","Google UK English Male","Martha","Oliver"];
+    for(const p of pref){ const m = gb.find(v => v.name.indexOf(p) === 0); if(m) return m; }
+    return gb[0] || voices[0] || null;
+  }
+  /* Speaking a letter NAME is the one thing text to speech gets wrong most often.
+     Handing it a respelling like "ay" makes engines read it as "aye", or garble
+     it, so the spoken token is the letter character itself, which every engine
+     pronounces as the letter name. The respelling stays on screen for the adult.
+     Overrides exist only where a bare character would be wrong: z is forced to
+     "zed" so a stray American voice cannot say zee, and the two digraphs are
+     spelled out so they are not read as words. */
+  /* Lower case, never upper: handed a capital, iOS announces "capital A", which
+     is not the letter's name and confuses the very thing being taught. */
+  const NAME_SPOKEN = { z:"zed", ck:"c k", qu:"q u" };
+  function letterSpeak(L){
+    if(!L) return "";
+    return NAME_SPOKEN[L.l] || L.l;
+  }
+
+  /* Voices disagree about lone letters, so the wording is the parent's choice.
+       letter   the character by itself, shortest and usually right
+       phrase   "the letter a", which forces name reading on stubborn voices
+       spelling the written respelling, "ay", "bee", "see"
+     letterName is for a letter spoken on its own, letterPhrase for one inside a
+     sentence, where a lone character is likeliest to be misread. */
+  function letterName(L){
+    if(!L) return "";
+    if(S.nameStyle === "spelling") return L.name;
+    if(S.nameStyle === "phrase") return "the letter, " + letterSpeak(L);
+    return letterSpeak(L);
+  }
+  function letterPhrase(L){
+    if(!L) return "";
+    if(S.nameStyle === "spelling") return L.name;
+    return "the letter, " + letterSpeak(L);
+  }
+
+  function sayLetter(L){
+    if(!L) return "";
+    if(S.stageMode === "names") return letterName(L);
+    if(S.stageMode === "sounds") return L.soundSay;
+    return letterName(L) + ". " + L.soundSay;
+  }
+  function soundsOn(){ return S.stageMode !== "names"; }
+
+  let speakTimer = null;
+  function speak(text, opts){
+    opts = opts || {};
+    if(!window.speechSynthesis) return;
+    try{
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      const v = pickVoice();
+      if(v){ u.voice = v; u.lang = v.lang; } else { u.lang = "en-GB"; }
+      u.rate = opts.rate || S.rate;
+      u.pitch = opts.pitch || 1.05;
+      clearTimeout(speakTimer);
+      speakTimer = setTimeout(function(){ try{ window.speechSynthesis.speak(u); }catch(e){} }, 40);
+    }catch(e){}
+  }
+  let actx = null;
+  function tone(kind){
+    try{
+      if(!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+      if(actx.state === "suspended") actx.resume();
+      const now = actx.currentTime;
+      const notes = kind === "good" ? [523.25, 659.25, 783.99] : [392.00, 349.23];
+      notes.forEach(function(f,i){
+        const o = actx.createOscillator(), g = actx.createGain();
+        o.type = "sine"; o.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, now + i*0.09);
+        g.gain.exponentialRampToValueAtTime(0.16, now + i*0.09 + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + i*0.09 + 0.24);
+        o.connect(g); g.connect(actx.destination);
+        o.start(now + i*0.09); o.stop(now + i*0.09 + 0.26);
+      });
+    }catch(e){}
+  }
+
+  /* ============================ HELPERS ============================ */
+  const view = document.getElementById("view");
+  const crumb = document.getElementById("crumb");
+  const backBtn = document.getElementById("backBtn");
+  function el(tag, cls, txt){ const n = document.createElement(tag); if(cls) n.className = cls; if(txt != null) n.textContent = txt; return n; }
+  function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+  function wordOk(w){
+    const have = {}; single().forEach(function(x){ have[x.l] = true; });
+    for(const ch of w.toLowerCase()){ if(!have[ch]) return false; }
+    return true;
+  }
+  function wordPool(){
+    let list = ALLWORDS.filter(wordOk);
+    if(list.length < 4) list = WORDS.cvcEasy.concat(WORDS.vc);
+    return list;
+  }
+  function glyph(letter, mode){
+    const L = BY[letter];
+    if(!L) return letter;
+    if(mode === "upper") return L.u;
+    if(mode === "lower") return L.l;
+    return L.u + L.l;
+  }
+  function dots(letter, skill){
+    const d = el("div","dots");
+    const n = score(letter, skill);
+    for(let i=0;i<3;i++){ const s = el("i"); if(i < Math.min(3, Math.floor(n/2))) s.className = "lit"; d.appendChild(s); }
+    return d;
+  }
+
+  /* ============================ ROUTER ============================ */
+  let current = "menu";
+  let unlocked = false;   /* resets whenever the grown-up leaves, and on reload */
+
+  function go(where){
+    if(where !== "parents" && where !== "lock") unlocked = false;
+    current = where;
+    backBtn.hidden = (where === "menu");
+    view.innerHTML = "";
+    window.scrollTo(0,0);
+    const fn = SCREENS[where] || SCREENS.menu;
+    fn();
+  }
+  function openParents(){
+    if(S.pin && !unlocked){ go("lock"); return; }
+    go("parents");
+  }
+  backBtn.addEventListener("click", function(){ go("menu"); });
+  document.getElementById("parentBtn").addEventListener("click", function(){
+    if(current === "parents" || current === "lock"){ go("menu"); return; }
+    openParents();
+  });
+
+  const SCREENS = {};
+
+  /* ---------------- menu ---------------- */
+  SCREENS.menu = function(){
+    crumb.textContent = "Choose an activity";
+    const h = el("h1", null, S.child ? ("Hello " + S.child + ", let's do letters") : "Let's do letters");
+    const p = el("p","sub","Seven activities, in order. Start at the Letter Board and only move on when she is quick and happy with the one before it.");
+    view.appendChild(h); view.appendChild(p);
+
+    const setLine = el("div","note");
+    setLine.innerHTML = "<b>Letters in play:</b> " + pool().map(function(x){return x.u+x.l;}).join("  ") +
+      ". Every game uses only these, so she never meets a letter she has not been taught. Change this in Grown-ups.";
+    view.appendChild(setLine);
+
+    if(!soundsOn()){
+      const modeLine = el("div","note");
+      modeLine.innerHTML = "<b>Right now she is learning letter NAMES only.</b> " +
+        "The three activities that are about sounds are waiting. Turn them on in Grown-ups " +
+        "once she can name her letters without thinking.";
+      view.appendChild(modeLine);
+    }
+
+    const wrap = el("div","stages");
+    STAGES.forEach(function(s){
+      const waiting = s.needsSound && !soundsOn();
+      const b = el("button", waiting ? "stage locked" : "stage");
+      b.type = "button";
+      const num = el("div","num", s.n);
+      const txt = el("div","txt");
+      const bb = el("b", null, s.t);
+      const sm = el("small", null, s.d);
+      const gl = el("span", waiting ? "goal later" : "goal", waiting ? "Comes later" : s.goal);
+      txt.appendChild(bb); txt.appendChild(sm); txt.appendChild(gl);
+      b.appendChild(num); b.appendChild(txt);
+      b.addEventListener("click", function(){
+        if(waiting){ go("unlock"); return; }
+        go(s.id);
+      });
+      wrap.appendChild(b);
+    });
+    view.appendChild(wrap);
+  };
+
+  /* ---------------- the gate on the sound activities ---------------- */
+  SCREENS.unlock = function(){
+    crumb.textContent = "Not yet";
+    view.appendChild(el("p","eyebrow","For the grown-up"));
+    view.appendChild(el("h1",null,"This one comes later"));
+    view.appendChild(el("p","sub","She is on letter names at the moment, and this activity is about letter sounds. Doing both at once is what makes a child mix up the shape, the name and the sound, so it is worth holding back."));
+
+    const task = el("div","task");
+    task.appendChild(el("p","prompt","Is she ready for sounds?"));
+    const ul = document.createElement("ul");
+    ul.style.color = "var(--ink-soft)";
+    ul.style.lineHeight = "1.7";
+    [
+      "She names every letter in the sets you have switched on, in a random order.",
+      "She does it without pausing to think, on two different days.",
+      "Big and Small is easy for her, including b and d."
+    ].forEach(function(t){ const li = document.createElement("li"); li.textContent = t; ul.appendChild(li); });
+    task.appendChild(ul);
+
+    const row = el("div","row");
+    const yes = el("button","btn primary","Yes, add the sounds");
+    yes.addEventListener("click", function(){ S.stageMode = "both"; save(); go("menu"); });
+    const no = el("button","btn ghost","Not yet, back to names");
+    no.addEventListener("click", function(){ go("menu"); });
+    row.appendChild(yes); row.appendChild(no);
+    task.appendChild(row);
+    view.appendChild(task);
+  };
+
+  /* ---------------- 1. letter board ---------------- */
+  SCREENS.board = function(){
+    crumb.textContent = "1 · Letter Board";
+    const head = el("div");
+    head.appendChild(el("p","eyebrow", soundsOn() ? "Stage 1 · goals 1, 2 and 3" : "Stage 1 · goals 1 and 2"));
+    head.appendChild(el("h1",null,"Letter Board"));
+    head.appendChild(el("p","sub", soundsOn()
+      ? "Tap a letter. She hears its name, then its sound, then a word. The big letter and the small letter always appear together, on real handwriting lines."
+      : "Tap a letter. She hears what it is called, and nothing else. One name, one shape. The big letter and the small letter always appear together, on real handwriting lines."));
+    view.appendChild(head);
+
+    const task = el("div","task");
+    const guide = el("div","guide");
+    const g = el("div","glyph","Aa");
+    guide.appendChild(g);
+    task.appendChild(guide);
+    const label = el("p","prompt","Tap any letter below");
+    const formLine = el("p","hint","The big letter and the small letter are the same letter wearing different clothes.");
+    task.appendChild(label); task.appendChild(formLine);
+
+    const row = el("div","row");
+    const bName = el("button","btn","Say the name again");
+    row.appendChild(bName);
+    /* The sound and the picture word are both cues for the SOUND, so in
+       names-only mode neither appears. Nothing on this screen contradicts
+       the one thing she is being asked to learn. */
+    if(soundsOn()){
+      const bSound = el("button","btn","Say the sound");
+      const bWord = el("button","btn","Say the word");
+      bSound.addEventListener("click", function(){ if(cur) speak(cur.soundSay); });
+      bWord.addEventListener("click", function(){ if(cur) speak(cur.word); });
+      row.appendChild(bSound); row.appendChild(bWord);
+    }
+    task.appendChild(row);
+    view.appendChild(task);
+
+    let cur = null;
+    function show(L){
+      cur = L;
+      g.textContent = L.u + L.l;
+      label.textContent = soundsOn()
+        ? (L.u + L.l + "  ·  " + L.name + "  ·  " + L.emoji + " " + L.word)
+        : (L.u + L.l + "  ·  called  " + L.name);
+      formLine.textContent = L.form;
+      win(L.l, "name");
+      speak(sayLetter(L));
+    }
+    bName.addEventListener("click", function(){ if(cur) speak(letterName(cur)); });
+
+    const controls = el("div","row");
+    [["both","Big and small"],["upper","Big only"],["lower","Small only"]].forEach(function(o){
+      const b = el("button","btn ghost", o[1]);
+      if(S.show === o[0]) b.className = "btn primary";
+      b.addEventListener("click", function(){ S.show = o[0]; save(); go("board"); });
+      controls.appendChild(b);
+    });
+    view.appendChild(controls);
+
+    const grid = el("div","grid");
+    grid.style.marginTop = "14px";
+    pool().forEach(function(L){
+      const t = el("button","tile");
+      t.type = "button";
+      t.textContent = glyph(L.l, S.show);
+      t.appendChild(dots(L.l,"name"));
+      t.addEventListener("click", function(){
+        [].forEach.call(grid.children, function(c){ c.classList.remove("on"); });
+        t.classList.add("on");
+        show(L);
+      });
+      grid.appendChild(t);
+    });
+    view.appendChild(grid);
+    if(pool().length) show(pool()[0]);
+  };
+
+  /* ---------------- 2. big and small ---------------- */
+  SCREENS.match = function(){
+    crumb.textContent = "2 · Big and Small";
+    view.appendChild(el("p","eyebrow","Stage 2 · goal 1"));
+    view.appendChild(el("h1",null,"Big and Small"));
+    view.appendChild(el("p","sub","A capital letter sits on the line. She taps the small letter that matches it. The wrong answers are always letters that look similar, so this really is discrimination practice."));
+
+    const task = el("div","task");
+    const guide = el("div","guide"); const g = el("div","glyph","A"); guide.appendChild(g);
+    const prompt = el("p","prompt","Which small letter matches?");
+    const say = el("p","say","");
+    const grid = el("div","grid small");
+    task.appendChild(guide); task.appendChild(prompt); task.appendChild(grid); task.appendChild(say);
+    const row = el("div","row");
+    const again = el("button","btn ghost","Say it again");
+    const next = el("button","btn primary","Next letter");
+    row.appendChild(again); row.appendChild(next);
+    task.appendChild(el("div",null,"")); task.appendChild(row);
+    view.appendChild(task);
+
+    let target = null, locked = false;
+    function confusersFor(l){
+      const out = [];
+      PAIRS.forEach(function(p){ if(p.a === l) out.push(p.b); if(p.b === l) out.push(p.a); });
+      return out;
+    }
+    function round(){
+      locked = false; say.textContent = ""; say.className = "say";
+      const p = single();
+      if(p.length < 2){ prompt.textContent = "Turn on more letters in Grown-ups."; grid.innerHTML = ""; return; }
+      target = pick(p);
+      g.textContent = target.u;
+      prompt.textContent = "Which small letter is " + target.name + "?";
+      const near = confusersFor(target.l).filter(function(x){ return BY[x] && BY[x].set <= S.maxSet; });
+      let opts = [target.l].concat(near);
+      const rest = shuffle(p.map(function(x){return x.l;}).filter(function(x){ return opts.indexOf(x) === -1; }));
+      while(opts.length < Math.min(4, p.length)) opts.push(rest.pop());
+      opts = shuffle(opts.slice(0,4));
+      grid.innerHTML = "";
+      opts.forEach(function(lt){
+        const t = el("button","tile", BY[lt].l);
+        t.type = "button";
+        t.addEventListener("click", function(){
+          if(locked) return;
+          if(lt === target.l){
+            locked = true; t.classList.add("right"); tone("good");
+            say.textContent = "Yes! " + target.u + " and " + target.l + " are both " + target.name + ".";
+            say.className = "say good";
+            win(target.l,"case");
+            speak("Yes. Big one and small one, both called, " + letterName(target) + ".");
+            setTimeout(round, 1900);
+          }else{
+            t.classList.add("wrong"); t.classList.add("wobble");
+            say.textContent = "That one is " + BY[lt].name + ". Look for " + target.name + ".";
+            say.className = "say soft";
+            tone("bad");
+            speak("That is " + letterPhrase(BY[lt]) + ". Find " + letterPhrase(target) + ".");
+            setTimeout(function(){ t.classList.remove("wrong","wobble"); }, 700);
+          }
+        });
+        grid.appendChild(t);
+      });
+      speak("Find " + letterPhrase(target));
+    }
+    again.addEventListener("click", function(){ if(target) speak("Find " + letterPhrase(target)); });
+    next.addEventListener("click", round);
+    round();
+  };
+
+  /* ---------------- 3. tricky twins ---------------- */
+  SCREENS.tricky = function(){
+    crumb.textContent = "3 · Tricky Twins";
+    view.appendChild(el("p","eyebrow","Stage 3 · goal 1"));
+    view.appendChild(el("h1",null,"Tricky Twins"));
+    view.appendChild(el("p","sub","The pairs that trip her up. Read the trick aloud first, then let her play. Five in a row on one pair means it has landed."));
+
+    const live = PAIRS.filter(function(p){
+      return BY[p.a] && BY[p.b] && BY[p.a].set <= S.maxSet && BY[p.b].set <= S.maxSet;
+    });
+    if(!live.length){
+      const n = el("div","note");
+      n.innerHTML = "<b>Not yet.</b> No confusable pair is fully unlocked. Turn on more sets in Grown-ups. b arrives in set 5 and y in set 7.";
+      view.appendChild(n);
+      return;
+    }
+
+    let P = live[0];
+    const chooser = el("div","row");
+    live.forEach(function(p){
+      const b = el("button","btn ghost", p.a + " / " + p.b);
+      b.addEventListener("click", function(){ P = p; render(); });
+      chooser.appendChild(b);
+    });
+    view.appendChild(chooser);
+
+    const task = el("div","task");
+    view.appendChild(task);
+
+    let streak = 0, locked = false, target = null;
+    function render(){
+      task.innerHTML = "";
+      streak = 0;
+      const cards = el("div","pair-row");
+      [P.a,P.b].forEach(function(lt){
+        const c = el("div","pair-card");
+        const gg = el("div","g", BY[lt].u + BY[lt].l);
+        const nm = el("small", null, soundsOn()
+          ? (BY[lt].name + " · " + BY[lt].emoji + " " + BY[lt].word)
+          : ("called " + BY[lt].name));
+        c.appendChild(gg); c.appendChild(nm);
+        c.addEventListener("click", function(){ speak(sayLetter(BY[lt])); });
+        cards.appendChild(c);
+      });
+      task.appendChild(cards);
+
+      const trick = el("div","note");
+      trick.innerHTML = "<b>Say this out loud:</b> " + P.trick + (P.cue ? " " + P.cue : "");
+      task.appendChild(trick);
+
+      const prompt = el("p","prompt","Tap the one I say");
+      const say = el("p","say","");
+      const grid = el("div","grid small");
+      grid.style.maxWidth = "300px"; grid.style.margin = "0 auto";
+      task.appendChild(prompt); task.appendChild(grid); task.appendChild(say);
+
+      function round(){
+        locked = false; say.textContent = ""; say.className = "say";
+        target = Math.random() < 0.5 ? P.a : P.b;
+        prompt.textContent = "Tap " + BY[target].name;
+        grid.innerHTML = "";
+        shuffle([P.a,P.b]).forEach(function(lt){
+          const t = el("button","tile", BY[lt].l);
+          t.type = "button";
+          t.addEventListener("click", function(){
+            if(locked) return;
+            if(lt === target){
+              locked = true; streak++; t.classList.add("right"); tone("good");
+              say.textContent = streak >= 5 ? ("Five in a row! " + BY[target].l + " is sorted.") : ("Yes, that is " + BY[target].name + ". " + streak + " in a row.");
+              say.className = "say good";
+              win(target,"tricky");
+              speak("Yes, " + letterPhrase(BY[target]) + ".");
+              setTimeout(round, 1500);
+            }else{
+              streak = 0; t.classList.add("wrong","wobble"); tone("bad");
+              say.textContent = P.trick;
+              say.className = "say soft";
+              speak("Careful. " + P.trick);
+              setTimeout(function(){ t.classList.remove("wrong","wobble"); }, 700);
+            }
+          });
+          grid.appendChild(t);
+        });
+        speak("Tap " + letterPhrase(BY[target]));
+      }
+      const row = el("div","row");
+      const again = el("button","btn ghost","Say it again");
+      again.addEventListener("click", function(){ if(target) speak("Tap " + letterPhrase(BY[target])); });
+      row.appendChild(again);
+      task.appendChild(row);
+      round();
+    }
+    render();
+  };
+
+  /* ---------------- 4. sound hunt ---------------- */
+  SCREENS.hunt = function(){
+    crumb.textContent = "4 · Sound Hunt";
+    view.appendChild(el("p","eyebrow","Stage 4 · goal 3"));
+    view.appendChild(el("h1",null,"Sound Hunt"));
+    view.appendChild(el("p","sub","She hears a sound and finds the letter that makes it. Nothing is shown first, so this is pure sound to letter, which is exactly what spelling needs."));
+
+    const task = el("div","task");
+    const prompt = el("p","prompt","Listen, then tap the letter");
+    const hint = el("p","hint","Tap the ear if you need to hear it again.");
+    const row = el("div","row");
+    const ear = el("button","btn primary","🔊  Play the sound");
+    row.appendChild(ear);
+    const say = el("p","say","");
+    const grid = el("div","grid small");
+    grid.style.marginTop = "18px";
+    task.appendChild(prompt); task.appendChild(hint); task.appendChild(row); task.appendChild(grid); task.appendChild(say);
+    view.appendChild(task);
+
+    let target = null, locked = false;
+    function round(){
+      locked = false; say.textContent = ""; say.className = "say";
+      const p = pool();
+      if(!p.length) return;
+      target = pick(p);
+      prompt.textContent = "Which letter makes this sound?";
+      grid.innerHTML = "";
+      const opts = shuffle(p).slice(0, Math.min(8, p.length));
+      if(opts.indexOf(target) === -1){ opts[0] = target; }
+      shuffle(opts).forEach(function(L){
+        const t = el("button","tile", glyph(L.l,"lower"));
+        t.type = "button";
+        t.appendChild(dots(L.l,"sound"));
+        t.addEventListener("click", function(){
+          if(locked) return;
+          if(L.l === target.l){
+            locked = true; t.classList.add("right"); tone("good");
+            say.textContent = "Yes! " + target.l + " says " + target.sound + ", like " + target.word + ".";
+            say.className = "say good";
+            win(target.l,"sound");
+            speak("Yes. " + target.soundSay);
+            setTimeout(round, 2000);
+          }else{
+            t.classList.add("wrong","wobble"); tone("bad");
+            say.textContent = L.l + " says " + L.sound + ". Listen again.";
+            say.className = "say soft";
+            speak(L.soundSay + ". Listen again. " + target.soundSay);
+            setTimeout(function(){ t.classList.remove("wrong","wobble"); }, 700);
+          }
+        });
+        grid.appendChild(t);
+      });
+      speak(target.soundSay);
+    }
+    ear.addEventListener("click", function(){ if(target) speak(target.soundSay); });
+    round();
+  };
+
+  /* ---------------- 5. look and name ---------------- */
+  SCREENS.spell = function(){
+    crumb.textContent = "5 · Look and Name";
+    view.appendChild(el("p","eyebrow","Stage 5 · goal 4"));
+    view.appendChild(el("h1",null,"Look and Name"));
+    view.appendChild(el("p","sub","A word she has never read before. First she taps every letter in order and names it. Then the word disappears and she builds it again. Naming every letter is the point, not reading the word."));
+
+    const task = el("div","task");
+    const prompt = el("p","prompt","");
+    const hint = el("p","hint","");
+    const strip = el("div","word-strip");
+    const slots = el("div","slots");
+    const grid = el("div","grid small");
+    const say = el("p","say","");
+    const row = el("div","row");
+    const hear = el("button","btn ghost","🔊 Hear the word");
+    const skip = el("button","btn ghost","Another word");
+    row.appendChild(hear); row.appendChild(skip);
+    task.appendChild(prompt); task.appendChild(hint); task.appendChild(strip);
+    task.appendChild(slots); task.appendChild(grid); task.appendChild(say); task.appendChild(row);
+    view.appendChild(task);
+
+    let word = "", step = 0, phase = 1, built = [];
+    function newWord(){
+      const list = wordPool();
+      word = pick(list);
+      step = 0; phase = 1; built = [];
+      render();
+      speak("Here is a new word. Point to the first letter.");
+    }
+    function render(){
+      say.textContent = ""; say.className = "say";
+      strip.innerHTML = ""; slots.innerHTML = ""; grid.innerHTML = "";
+      if(phase === 1){
+        prompt.textContent = "Name every letter, left to right";
+        hint.textContent = "Tap them in order. Letter " + (step+1) + " of " + word.length + ".";
+        slots.hidden = true; grid.hidden = true;
+        [].forEach.call(word, function(ch, i){
+          const b = el("button","wl", ch);
+          b.type = "button";
+          if(i < step) b.classList.add("right");
+          if(i === step) b.classList.add("on");
+          b.addEventListener("click", function(){
+            if(i !== step){
+              say.textContent = "Start from the left. Tap the one with the blue box.";
+              say.className = "say soft";
+              return;
+            }
+            const L = BY[ch];
+            speak(L ? sayLetter(L) : ch);
+            if(L) win(ch,"inword");
+            step++;
+            if(step >= word.length){
+              tone("good");
+              setTimeout(function(){
+                phase = 2; render();
+                speak("Well done. Now build the word. It was " + word + ".");
+              }, 1200);
+            }else{
+              render();
+            }
+          });
+          strip.appendChild(b);
+        });
+      }else{
+        prompt.textContent = "Now build the word";
+        hint.textContent = "The word was said out loud. Tap the letters in order.";
+        slots.hidden = false; grid.hidden = false;
+        [].forEach.call(word, function(ch,i){
+          const s = el("div","slot", built[i] || "");
+          if(built[i]) s.classList.add("filled");
+          else if(i === built.length) s.classList.add("next");
+          slots.appendChild(s);
+        });
+        const need = word.split("");
+        const extra = shuffle(single().map(function(x){return x.l;}).filter(function(x){ return need.indexOf(x) === -1; })).slice(0,4);
+        shuffle(need.concat(extra)).forEach(function(lt){
+          const t = el("button","tile", lt);
+          t.type = "button";
+          t.addEventListener("click", function(){
+            const want = word[built.length];
+            if(lt === want){
+              built.push(lt); tone("good");
+              const L = BY[lt]; if(L) speak(letterName(L));
+              if(built.length === word.length){
+                say.textContent = "You built " + word + "!";
+                say.className = "say good";
+                speak("You built it. " + word + ".");
+                setTimeout(newWord, 2200);
+                render();
+                return;
+              }
+              render();
+            }else{
+              t.classList.add("wrong","wobble"); tone("bad");
+              const L = BY[lt];
+              say.textContent = "That is " + (L ? L.name : lt) + ". Listen for the next sound.";
+              say.className = "say soft";
+              speak(word);
+              setTimeout(function(){ t.classList.remove("wrong","wobble"); }, 700);
+            }
+          });
+          grid.appendChild(t);
+        });
+      }
+    }
+    hear.addEventListener("click", function(){ speak(word); });
+    skip.addEventListener("click", newWord);
+    newWord();
+  };
+
+  /* ---------------- 6. two sounds ---------------- */
+  SCREENS.two = function(){
+    crumb.textContent = "6 · Two Sounds";
+    view.appendChild(el("p","eyebrow","Stage 6 · the bridge between reading and spelling"));
+    view.appendChild(el("h1",null,"Two Sounds"));
+    view.appendChild(el("p","sub","This is the idea she is missing. A letter has one name that never changes, but its sound can change depending on the word. Tap each pair and listen to the difference."));
+
+    const note = el("div","note");
+    note.innerHTML = "<b>How to use it:</b> say the two words yourself first, exaggerate the difference, then ask her which one sounds different. Do one card a day, not all eight.";
+    view.appendChild(note);
+
+    TWOSOUNDS.forEach(function(T){
+      const card = el("div","task");
+      const head = el("p","prompt", "The letter " + T.letter + " · name: " + (BY[T.letter] ? BY[T.letter].name : T.letter));
+      card.appendChild(head);
+      const row = el("div","pair-row");
+      [T.a, T.b].forEach(function(side){
+        const c = el("button","pair-card");
+        c.type = "button";
+        const g = el("div","g", side.w);
+        g.style.fontSize = "clamp(30px,7vw,44px)";
+        const s = el("small", null, "the " + T.letter + " says " + side.s);
+        c.appendChild(g); c.appendChild(s);
+        c.addEventListener("click", function(){
+          speak(side.w + ". " + T.letter + " says " + side.s + ", in " + side.w + ".");
+        });
+        row.appendChild(c);
+      });
+      card.appendChild(row);
+      const rule = el("p","hint", T.rule);
+      card.appendChild(rule);
+      view.appendChild(card);
+    });
+  };
+
+  /* ---------------- 7. listen and spell ---------------- */
+  SCREENS.listen = function(){
+    crumb.textContent = "7 · Listen and Spell";
+    view.appendChild(el("p","eyebrow","Stage 7 · goal 5"));
+    view.appendChild(el("h1",null,"Listen and Spell"));
+    view.appendChild(el("p","sub","Nothing is written on the screen. She hears a word, counts the sounds, and taps the letters. This is dictation, and it is the last and hardest step."));
+
+    const task = el("div","task");
+    const prompt = el("p","prompt","Tap the ear, then spell what you hear");
+    const hint = el("p","hint","The boxes tell her how many sounds to listen for.");
+    const row = el("div","row");
+    const ear = el("button","btn primary","🔊  Say the word");
+    const slow = el("button","btn ghost","🐢  Say it slowly");
+    const reveal = el("button","btn ghost","Show me");
+    row.appendChild(ear); row.appendChild(slow); row.appendChild(reveal);
+    const slots = el("div","slots");
+    const grid = el("div","grid small");
+    const say = el("p","say","");
+    task.appendChild(prompt); task.appendChild(hint); task.appendChild(row);
+    task.appendChild(slots); task.appendChild(grid); task.appendChild(say);
+    view.appendChild(task);
+
+    let word = "", built = [], shown = false;
+    function newWord(){
+      const list = wordPool();
+      const shortFirst = list.filter(function(w){ return w.length <= 3; });
+      word = pick(shortFirst.length ? shortFirst.concat(list) : list);
+      built = []; shown = false;
+      render();
+      setTimeout(function(){ speak(word + ". " + word + "."); }, 300);
+    }
+    function render(){
+      slots.innerHTML = ""; grid.innerHTML = "";
+      [].forEach.call(word, function(ch,i){
+        const s = el("div","slot", shown ? ch : (built[i] || ""));
+        if(built[i]) s.classList.add("filled");
+        else if(i === built.length && !shown) s.classList.add("next");
+        slots.appendChild(s);
+      });
+      const need = word.split("");
+      const extra = shuffle(single().map(function(x){return x.l;}).filter(function(x){ return need.indexOf(x) === -1; })).slice(0,5);
+      shuffle(need.concat(extra)).forEach(function(lt){
+        const t = el("button","tile", lt);
+        t.type = "button";
+        t.addEventListener("click", function(){
+          if(shown) return;
+          const want = word[built.length];
+          if(lt === want){
+            built.push(lt); tone("good");
+            const L = BY[lt]; if(L) speak(L.soundSay.split(",")[0]);
+            if(built.length === word.length){
+              say.textContent = "You spelled " + word + " all by yourself!";
+              say.className = "say good";
+              word.split("").forEach(function(c){ win(c,"dictation"); });
+              speak("Brilliant. You spelled " + word + ".");
+              setTimeout(newWord, 2400);
+            }
+            render();
+          }else{
+            t.classList.add("wrong","wobble"); tone("bad");
+            say.textContent = "Listen again. What sound comes next?";
+            say.className = "say soft";
+            speak(word + ". " + word);
+            setTimeout(function(){ t.classList.remove("wrong","wobble"); }, 700);
+          }
+        });
+        grid.appendChild(t);
+      });
+    }
+    ear.addEventListener("click", function(){ speak(word); });
+    slow.addEventListener("click", function(){ speak(word, {rate: Math.max(0.4, S.rate - 0.35)}); });
+    reveal.addEventListener("click", function(){
+      shown = true; render();
+      say.textContent = "The word was " + word + ". Read it together, then try another.";
+      say.className = "say";
+      speak("The word was " + word);
+      setTimeout(newWord, 3200);
+    });
+    newWord();
+  };
+
+  /* ---------------- the grown-ups lock ---------------- */
+  /* Shared keypad, used both to unlock and to set a new PIN. onDone gets the
+     four digits. */
+  function keypadScreen(opts){
+    const wrap = el("div","lockwrap");
+    wrap.appendChild(el("p","prompt", opts.title));
+    const hint = el("p","hint", opts.hint || "");
+    wrap.appendChild(hint);
+
+    const pips = el("div","pips");
+    for(let i=0;i<4;i++) pips.appendChild(el("i"));
+    wrap.appendChild(pips);
+
+    let entry = "";
+    function draw(){
+      [].forEach.call(pips.children, function(p,i){
+        p.className = i < entry.length ? "on" : "";
+      });
+    }
+    function push(d){
+      if(entry.length >= 4) return;
+      entry += d; draw();
+      if(entry.length === 4){
+        const value = entry;
+        setTimeout(function(){
+          opts.onDone(value, function reject(msg){
+            entry = ""; draw();
+            hint.textContent = msg;
+            hint.style.color = "var(--red)";
+            pips.classList.add("wobble");
+            setTimeout(function(){ pips.classList.remove("wobble"); }, 350);
+          });
+        }, 160);
+      }
+    }
+
+    const pad = el("div","keypad");
+    ["1","2","3","4","5","6","7","8","9"].forEach(function(d){
+      const b = el("button","key", d);
+      b.type = "button";
+      b.addEventListener("click", function(){ push(d); });
+      pad.appendChild(b);
+    });
+    const clear = el("button","key wide","Clear");
+    clear.type = "button";
+    clear.addEventListener("click", function(){ entry = ""; draw(); });
+    const zero = el("button","key","0");
+    zero.type = "button";
+    zero.addEventListener("click", function(){ push("0"); });
+    const back = el("button","key wide","Back");
+    back.type = "button";
+    back.addEventListener("click", function(){ go("menu"); });
+    pad.appendChild(clear); pad.appendChild(zero); pad.appendChild(back);
+    wrap.appendChild(pad);
+    return wrap;
+  }
+
+  SCREENS.lock = function(){
+    crumb.textContent = "Grown-ups";
+    const task = el("div","task");
+    task.appendChild(keypadScreen({
+      title: "Enter the grown-ups PIN",
+      hint: "This part changes how she learns, so it is kept out of her way.",
+      onDone: function(value, reject){
+        if(value === S.pin){ unlocked = true; go("parents"); }
+        else reject("That is not the PIN. Try again.");
+      }
+    }));
+
+    /* Recovery, because a PIN nobody can remember is just a locked app.
+       A times table question is enough to keep a four year old out. */
+    const a = 3 + Math.floor(Math.random()*7);
+    const b = 4 + Math.floor(Math.random()*6);
+    const forgot = el("button","linkish","I have forgotten the PIN");
+    forgot.addEventListener("click", function(){
+      forgot.hidden = true;
+      const box = el("div","lockwrap");
+      box.style.marginTop = "18px";
+      box.appendChild(el("p","hint","Answer this to clear the PIN: what is " + a + " times " + b + "?"));
+      const row = el("div","row");
+      const opts = shuffle([a*b, a*b + b, a*b - a, a*b + 3]);
+      opts.forEach(function(n){
+        const bt = el("button","btn ghost", String(n));
+        bt.addEventListener("click", function(){
+          if(n === a*b){
+            S.pin = ""; save(); unlocked = true; go("parents");
+          }else{
+            bt.classList.add("wobble");
+            setTimeout(function(){ bt.classList.remove("wobble"); }, 350);
+          }
+        });
+        row.appendChild(bt);
+      });
+      box.appendChild(row);
+      task.appendChild(box);
+    });
+    task.appendChild(forgot);
+    view.appendChild(task);
+  };
+
+  SCREENS.setpin = function(){
+    crumb.textContent = "Grown-ups";
+    const task = el("div","task");
+    let first = "";
+    function ask(){
+      task.innerHTML = "";
+      task.appendChild(keypadScreen({
+        title: first ? "Enter it once more" : "Choose a four digit PIN",
+        hint: first ? "Just to be sure you have it." : "She will need this to reach the grown-ups settings.",
+        onDone: function(value, reject){
+          if(!first){ first = value; ask(); return; }
+          if(value === first){
+            S.pin = value; save(); unlocked = true; go("parents");
+          }else{
+            first = ""; reject("Those did not match. Start again.");
+          }
+        }
+      }));
+    }
+    ask();
+    view.appendChild(task);
+  };
+
+  /* ---------------- grown-ups ---------------- */
+  SCREENS.parents = function(){
+    crumb.textContent = "Grown-ups";
+    view.appendChild(el("p","eyebrow","For the parent"));
+    view.appendChild(el("h1",null,"Grown-ups"));
+    view.appendChild(el("p","sub","Set what she is learning right now, pick the voice, choose how many letters are in play, and see what she has practised."));
+
+    /* stage: names first, sounds later */
+    const c0 = el("div","task");
+    c0.appendChild(el("h2",null,"What she is learning right now"));
+    c0.appendChild(el("p","hint","This is the most important setting here. Move it on when she is ready, not on a schedule."));
+    const MODES = [
+      ["names","Letter names only","Tapping a letter says what it is called and nothing else. Sound Hunt, Two Sounds and Listen and Spell wait."],
+      ["both","Names, then sounds","Tapping a letter says the name, then the sound, then a picture word. All seven activities open up."],
+      ["sounds","Sounds only","For later revision, when the names are secure and you want pure phonics practice."]
+    ];
+    MODES.forEach(function(m){
+      const b = el("button", S.stageMode === m[0] ? "stage" : "stage");
+      b.type = "button";
+      if(S.stageMode !== m[0]) b.style.opacity = ".7";
+      const num = el("div","num", S.stageMode === m[0] ? "✓" : "");
+      const txt = el("div","txt");
+      txt.appendChild(el("b", null, m[1]));
+      txt.appendChild(el("small", null, m[2]));
+      b.appendChild(num); b.appendChild(txt);
+      b.style.marginBottom = "10px";
+      b.addEventListener("click", function(){ S.stageMode = m[0]; save(); go("parents"); });
+      c0.appendChild(b);
+    });
+    const c0note = el("div","note");
+    c0note.innerHTML = "<b>When to add the sounds:</b> when she can name every letter in the sets you have switched on, " +
+      "in a random order, without pausing, on two different days. Names first is deliberate. A child who is still " +
+      "unsure which shape is which does not need a second label for it on the same day.";
+    c0.appendChild(c0note);
+    view.appendChild(c0);
+
+    const split = el("div","split");
+
+    /* voice */
+    const c1 = el("div","task");
+    c1.appendChild(el("h2",null,"Voice"));
+    const vf = el("div","field");
+    vf.appendChild(el("label",null,"British voice"));
+    const sel = document.createElement("select");
+    sel.id = "voice-select";
+    function fillVoices(){
+      sel.innerHTML = "";
+      loadVoices();
+      const list = britishVoices();
+      if(!list.length){
+        const o = document.createElement("option");
+        o.textContent = "No English voice found yet, tap Test";
+        sel.appendChild(o);
+        return;
+      }
+      list.forEach(function(v){
+        const o = document.createElement("option");
+        o.value = v.voiceURI;
+        o.textContent = v.name + " (" + v.lang + ")";
+        if(v.voiceURI === S.voiceURI) o.selected = true;
+        sel.appendChild(o);
+      });
+    }
+    fillVoices();
+    if(window.speechSynthesis) window.speechSynthesis.onvoiceschanged = function(){ loadVoices(); fillVoices(); };
+    sel.addEventListener("change", function(){ S.voiceURI = sel.value; save(); speak("Hello. I am ready."); });
+    vf.appendChild(sel);
+    c1.appendChild(vf);
+
+    const rf = el("div","field");
+    rf.appendChild(el("label",null,"Speaking speed"));
+    const rng = document.createElement("input");
+    rng.type = "range"; rng.id = "rate-range"; rng.min = "0.5"; rng.max = "1.1"; rng.step = "0.05"; rng.value = String(S.rate);
+    rng.addEventListener("change", function(){ S.rate = parseFloat(rng.value); save(); speak("a, a, apple"); });
+    rf.appendChild(rng);
+    c1.appendChild(rf);
+
+    /* How a letter name is worded. Voices disagree, so this is a real setting
+       rather than a guess baked into the code. */
+    const nf = el("div","field");
+    nf.appendChild(el("label",null,"How to say a letter's name"));
+    const STYLES = [
+      ["letter","Just the letter","a"],
+      ["phrase","The letter a","the letter, a"],
+      ["spelling","Spelled out: ay, bee, see","ay"]
+    ];
+    const styleRow = el("div","row");
+    styleRow.style.justifyContent = "flex-start";
+    STYLES.forEach(function(st){
+      const b = el("button", S.nameStyle === st[0] ? "btn primary" : "btn ghost", st[1]);
+      b.addEventListener("click", function(){ S.nameStyle = st[0]; save(); go("parents"); });
+      styleRow.appendChild(b);
+    });
+    nf.appendChild(styleRow);
+    c1.appendChild(nf);
+
+    const test = el("button","btn primary","Test the letter names");
+    test.addEventListener("click", function(){
+      /* The five vowels plus the names engines most often get wrong. */
+      const probe = ["a","e","i","o","u","h","w","y","z"].map(function(lt){
+        return letterName(BY[lt]);
+      }).join(". ");
+      speak(probe + ".");
+    });
+    c1.appendChild(test);
+
+    const warn = el("div","note");
+    warn.innerHTML = "<b>If the letter names sound wrong,</b> it is the tablet's voice, not the app. " +
+      "Tap the test and listen for three things. <b>A</b> should rhyme with day, not with eye. " +
+      "Nothing should say the word <i>capital</i>. The last one should be <b>zed</b>. " +
+      "If any of that is off, try the next wording above, then a different voice.";
+    c1.appendChild(warn);
+
+    const warn2 = el("div","note");
+    warn2.innerHTML = "<b>One honest limit on the sounds.</b> No computer voice can say a pure <i>t</i> or <i>b</i> " +
+      "without a little <i>uh</i> on the end, so the app says <i>tuh</i>. Say those yourself first and keep them clipped. " +
+      "The letter names and the example words are right.";
+    c1.appendChild(warn2);
+    split.appendChild(c1);
+
+    /* letters in play */
+    const c2 = el("div","task");
+    c2.appendChild(el("h2",null,"Letters in play"));
+    c2.appendChild(el("p","hint","Games only use the sets you switch on. Add one set when she is confident, not before. This order is the one British schools use, and it deliberately keeps b and d apart."));
+    const SETS = [[1,"s a t p"],[2,"i n m d"],[3,"g o c k"],[4,"ck e u r"],[5,"h b f l"],[6,"j v w x"],[7,"y z qu"]];
+    const setRow = el("div","row");
+    setRow.style.justifyContent = "flex-start";
+    SETS.forEach(function(s){
+      const b = el("button", S.maxSet >= s[0] ? "btn primary" : "btn ghost", "Set " + s[0] + " · " + s[1]);
+      b.addEventListener("click", function(){ S.maxSet = s[0]; save(); go("parents"); });
+      setRow.appendChild(b);
+    });
+    c2.appendChild(setRow);
+    const cf = el("div","field");
+    cf.style.marginTop = "16px";
+    cf.appendChild(el("label",null,"Her name (optional, used on the welcome screen)"));
+    const nameIn = document.createElement("input");
+    nameIn.type = "text"; nameIn.id = "child-name"; nameIn.value = S.child || ""; nameIn.placeholder = "e.g. Mariam";
+    nameIn.addEventListener("change", function(){ S.child = nameIn.value.trim().slice(0,20); save(); });
+    cf.appendChild(nameIn);
+    c2.appendChild(cf);
+    split.appendChild(c2);
+    view.appendChild(split);
+
+    /* progress */
+    const c3 = el("div","task");
+    c3.appendChild(el("h2",null,"What she has practised"));
+    c3.appendChild(el("p","hint","Counts of correct answers on this tablet. Three or more in a column is a good sign, but the paper sheets are the real test."));
+    const sc = el("div","scroll");
+    const tb = document.createElement("table");
+    tb.innerHTML = "<thead><tr><th>Letter</th><th>Name</th><th>Big &amp; small</th><th>Sound</th><th>In a word</th><th>Dictation</th></tr></thead>";
+    const body = document.createElement("tbody");
+    LETTERS.forEach(function(L){
+      const tr = document.createElement("tr");
+      const cells = [L.u + L.l, score(L.l,"name"), score(L.l,"case"), score(L.l,"sound"), score(L.l,"inword"), score(L.l,"dictation")];
+      cells.forEach(function(v,i){
+        const td = document.createElement("td");
+        if(i === 0) td.className = "g";
+        td.textContent = v;
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+    tb.appendChild(body);
+    sc.appendChild(tb);
+    c3.appendChild(sc);
+    const reset = el("button","btn ghost","Clear all progress");
+    reset.style.marginTop = "14px";
+    reset.addEventListener("click", function(){
+      if(reset.dataset.armed === "1"){ S.progress = {}; save(); go("parents"); return; }
+      reset.dataset.armed = "1"; reset.textContent = "Tap again to clear everything";
+    });
+    c3.appendChild(reset);
+    view.appendChild(c3);
+
+    /* the lock */
+    const cL = el("div","task");
+    cL.appendChild(el("h2",null,"Keep her out of this screen"));
+    const lockRow = el("div","row");
+    lockRow.style.justifyContent = "flex-start";
+    if(S.pin){
+      cL.appendChild(el("p","hint","A PIN is set. It is asked for every time this screen is opened, and again after the app is closed."));
+      const change = el("button","btn","Change the PIN");
+      change.addEventListener("click", function(){ go("setpin"); });
+      const remove = el("button","btn ghost","Remove the PIN");
+      remove.addEventListener("click", function(){
+        if(remove.dataset.armed === "1"){ S.pin = ""; save(); go("parents"); return; }
+        remove.dataset.armed = "1"; remove.textContent = "Tap again to remove it";
+      });
+      lockRow.appendChild(change); lockRow.appendChild(remove);
+    }else{
+      cL.appendChild(el("p","hint","Without a PIN she can wander in here and switch the sounds on, change the voice or wipe her progress, usually by accident."));
+      const set = el("button","btn primary","Set a PIN");
+      set.addEventListener("click", function(){ go("setpin"); });
+      lockRow.appendChild(set);
+    }
+    cL.appendChild(lockRow);
+    const lnote = el("div","note");
+    lnote.innerHTML = "<b>If you forget it,</b> the PIN screen offers a times table question that clears it. " +
+      "This is a gate to stop a small child pressing things, not a password, so do not reuse one that matters.";
+    cL.appendChild(lnote);
+    view.appendChild(cL);
+
+    const c4 = el("div","task");
+    c4.appendChild(el("h2",null,"How to run the week"));
+    c4.appendChild(el("p","hint","Fifteen minutes a day beats an hour at the weekend. Stop while she still wants more."));
+    const ol = document.createElement("ol");
+    [
+      "Two minutes of letter names on the Letter Board, only letters she already knows, fast and cheerful.",
+      "Three minutes of sounds on the same board, always the sound and then the picture word.",
+      "Five minutes on the printed sheet for the new letter, saying the formation phrase aloud while she writes.",
+      "Three minutes on whichever game matches the stage she is on.",
+      "Two minutes of dictation on a whiteboard. Praise any sensible attempt, even if the spelling is wrong."
+    ].forEach(function(t){ const li = document.createElement("li"); li.textContent = t; li.style.marginBottom = "6px"; ol.appendChild(li); });
+    ol.style.paddingLeft = "20px";
+    ol.style.color = "var(--ink-soft)";
+    c4.appendChild(ol);
+    view.appendChild(c4);
+  };
+
+  /* ============================ BOOT ============================ */
+  /* build-site.py rewrites this token when it builds the hosted copy, so the
+     footer shows which version is actually running on the tablet. In the
+     Claude artifact the token is left alone and no stamp is shown. */
+  var BUILD = "75f2fa62";
+  (function stamp(){
+    var n = document.getElementById("build-stamp");
+    if(n && BUILD.indexOf("_") === -1) n.textContent = "Version " + BUILD;
+  })();
+
+  function start(){ go("menu"); }
+  if(window.claude && window.claude.hot){
+    if(window.claude.hot.snapshot) window.claude.hot.snapshot(function(){ return {screen: current}; });
+    if(window.claude.hot.ready) window.claude.hot.ready(function(d){ start(); if(d && d.screen && SCREENS[d.screen]) go(d.screen); });
+    else start();
+  } else {
+    start();
+  }
+})();
+</script>
+
+</body>
+</html>
